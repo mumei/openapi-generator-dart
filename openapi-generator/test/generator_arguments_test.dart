@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:build_test/build_test.dart';
 import 'package:openapi_generator/src/models/generator_arguments.dart';
 import 'package:openapi_generator/src/utils.dart';
@@ -147,7 +148,9 @@ void main() {
                 config,
                 (resolver) async =>
                     (await resolver.findLibraryByName('test_lib'))!))
-            .getClass('TestClassConfig')!
+            .children
+            .whereType<ClassElement2>()
+            .firstWhere((element) => element.name == 'TestClassConfig')
             .metadata
             .map((e) => src_gen.ConstantReader(e.computeConstantValue()!))
             .first;
@@ -198,7 +201,9 @@ void main() {
                 config,
                 (resolver) async =>
                     (await resolver.findLibraryByName('test_lib'))!))
-            .getClass('DioPropertiesTestConfig')!
+            .children
+            .whereType<ClassElement2>()
+            .firstWhere((element) => element.name == 'DioPropertiesTestConfig')
             .metadata
             .map((e) => src_gen.ConstantReader(e.computeConstantValue()!))
             .first;
@@ -256,7 +261,9 @@ void main() {
                 config,
                 (resolver) async =>
                     (await resolver.findLibraryByName('test_lib'))!))
-            .getClass('DioAltPropertiesTestConfig')!
+            .children
+            .whereType<ClassElement2>()
+            .firstWhere((element) => element.name == 'DioAltPropertiesTestConfig')
             .metadata
             .map((e) => src_gen.ConstantReader(e.computeConstantValue()!))
             .first;
@@ -320,7 +327,9 @@ void main() {
                 config,
                 (resolver) async =>
                     (await resolver.findLibraryByName('test_lib'))!))
-            .getClass('DioAltPropertiesTestConfig')!
+            .children
+            .whereType<ClassElement2>()
+            .firstWhere((element) => element.name == 'DioAltPropertiesTestConfig')
             .metadata
             .map((e) => src_gen.ConstantReader(e.computeConstantValue()!))
             .first;

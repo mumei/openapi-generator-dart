@@ -11,8 +11,9 @@
 
 ---
 
-## ⚠️ Java Requirement
+## ⚠️ System Requirements
 
+### Java Requirement
 > **Java is required to use this library.**  
 > The OpenAPI Generator CLI is a Java application.  
 > Please ensure you have Java (version 8 or higher) installed and available in your system PATH.  
@@ -23,6 +24,14 @@
 > ```
 >
 > If you do not have Java installed, download it from [Adoptium](https://adoptium.net/) or [Oracle](https://www.oracle.com/java/technologies/downloads/).
+
+### Flutter/Dart Compatibility
+This package supports:
+- **Flutter**: 3.32.0 and later
+- **Dart SDK**: 3.8.0 and later 
+- **analyzer**: ^7.4.0
+- **source_gen**: ^3.0.0
+- **build_runner**: Compatible with the latest versions
 
 ---
 
@@ -53,6 +62,14 @@
 ## Overview
 
 This repository provides Dart/Flutter libraries for generating OpenAPI client SDKs directly from your OpenAPI specification. Inspired by [Openapi Generator Cli (npm)](https://www.npmjs.com/package/@openapitools/openapi-generator-cli), it enables seamless integration into Dart and Flutter projects.
+
+### 🚀 Flutter 3.32.0 Compatible
+
+This package has been updated to fully support **Flutter 3.32.0** and the latest Dart SDK with:
+- Updated `analyzer` package to ^7.4.0 for enhanced static analysis
+- Updated `source_gen` to ^3.0.0 for improved code generation
+- Full compatibility with the latest Element2 API changes
+- Enhanced build performance and reliability
 
 ### Libraries
 
@@ -124,10 +141,14 @@ class Example {}
 Run the build command:
 
 ```sh
+# For Dart projects
 dart run build_runner build --delete-conflicting-outputs
-# or, for Flutter projects:
+
+# For Flutter projects (recommended)
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
+
+> **Note for Flutter 3.32.0 users:** If you encounter any build issues, ensure you have the latest compatible versions of `build_runner` and related packages installed.
 
 The generated SDK will appear in the specified output directory.
 
@@ -193,6 +214,27 @@ class CustomApi {}
 
 ### Common Issues
 
+- **Flutter 3.32.0 Compatibility:**  
+  If you encounter build issues after upgrading to Flutter 3.32.0:
+  ```bash
+  # Clear pub cache
+  dart pub cache clean
+  # Reinstall dependencies
+  flutter pub get
+  # Clear build cache
+  dart run build_runner clean
+  # Run build
+  dart run build_runner build --delete-conflicting-outputs
+  ```
+
+- **Analyzer/Source Gen Compatibility Issues:**  
+  Ensure you're using compatible versions:
+  ```yaml
+  dev_dependencies:
+    build_runner: ^2.6.0  # or latest
+    openapi_generator: ^7.0.0  # latest with Flutter 3.32.0 support
+  ```
+
 - **Dependency Conflicts:**  
   Use `dependency_overrides` in the generated package's `pubspec.yaml` and add `pubspec.yaml` to `.openapi-generator-ignore` to prevent overwrites.
 
@@ -208,3 +250,53 @@ test/*
 # Ignore pubspec.yaml to preserve manual changes
 pubspec.yaml
 ```
+
+---
+
+## Recent Updates
+
+### v7.0.0 - Flutter 3.32.0 Support (Major Release)
+
+- ✅ **Full Flutter 3.32.0 Compatibility**: Updated all dependencies for seamless integration with the latest Flutter version
+- 🔄 **Updated Dependencies**:
+  - `analyzer`: Updated to ^7.4.0 for enhanced static analysis
+  - `source_gen`: Updated to ^3.0.0 for improved code generation
+  - `build_test`: Updated to ^3.3.0 for better testing support
+- 🛠 **Element2 API Support**: Adapted to the latest analyzer API changes for better compatibility
+- 🚀 **Performance Improvements**: Enhanced build performance and reliability
+- 🐛 **Bug Fixes**: Resolved compatibility issues with latest Dart SDK
+
+#### Breaking Changes in v7.0.0
+- **Minimum Flutter version**: Now requires Flutter 3.32.0 or later
+- **Minimum Dart SDK version**: Now requires Dart 3.8.0 or later
+- **Updated analyzer API**: Internal changes to support Element2 API (no user-facing changes expected)
+- **Dependencies**: Major version updates to core dependencies for better performance and compatibility
+
+### Upgrade Guide
+
+If you're upgrading from a previous version to use with Flutter 3.32.0:
+
+1. Update your dependencies:
+   ```yaml
+   dev_dependencies:
+     openapi_generator: ^7.0.0  # Updated version with Flutter 3.32.0 support
+     build_runner: ^2.6.0       # Ensure compatibility
+   ```
+
+2. Clear caches and regenerate:
+   ```bash
+   dart pub cache clean
+   flutter pub get
+   dart run build_runner clean
+   dart run build_runner build --delete-conflicting-outputs
+   ```
+
+---
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guide](https://github.com/gibahjoe/openapi-generator-dart/blob/master/CONTRIBUTING.md) for details.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/gibahjoe/openapi-generator-dart/blob/master/LICENSE) file for details.

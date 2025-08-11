@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:build_test/build_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:openapi_generator/src/gen_on_spec_changes.dart';
@@ -112,7 +113,9 @@ class TestClassConfig extends OpenapiGeneratorConfig {}
                     ''',
               (resolver) async =>
                   (await resolver.findLibraryByName('test_lib'))!))
-          .getClass('TestClassConfig')!
+          .children
+          .whereType<ClassElement2>()
+          .firstWhere((element) => element.name == 'TestClassConfig')
           .metadata
           .map((e) => ConstantReader(e.computeConstantValue()!))
           .first;
@@ -406,7 +409,9 @@ class TestClassConfig extends OpenapiGeneratorConfig {}
                       .readAsStringSync(),
                   (resolver) async =>
                       (await resolver.findLibraryByName('test_lib'))!))
-              .getClass('TestClassConfig')!
+              .children
+          .whereType<ClassElement2>()
+          .firstWhere((element) => element.name == 'TestClassConfig')
               .metadata
               .map((e) => ConstantReader(e.computeConstantValue()!))
               .first;
@@ -453,7 +458,9 @@ class TestClassConfig extends OpenapiGeneratorConfig {}
                     ''',
                     (resolver) async =>
                         (await resolver.findLibraryByName('test_lib'))!))
-                .getClass('TestClassConfig')!
+                .children
+          .whereType<ClassElement2>()
+          .firstWhere((element) => element.name == 'TestClassConfig')
                 .metadata
                 .map((e) => ConstantReader(e.computeConstantValue()!))
                 .first;

@@ -21,7 +21,9 @@ class GeneratorArguments {
   final String cachePath;
 
   /// Informs the generator to disable the cache.
-  @Deprecated(skipSpecDepMessage)
+  @Deprecated('This will be removed in next major release. This generator will always run'
+      'if changes are detected on local spec file. see https://github.com/gibahjoe/openapi-generator-dart#deprecation--breaking-change-notice -  Use `forceAlwaysRun` '
+      'to always run the generator regardless of spec changes.')
   final bool skipIfSpecIsUnchanged;
 
   final bool isDebug;

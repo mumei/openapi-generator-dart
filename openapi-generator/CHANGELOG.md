@@ -1,3 +1,47 @@
+## [7.0.0](https://github.com/gibahjoe/openapi-generator-dart/compare/v6.1.0...v7.0.0) (2025-08-11)
+
+### ⚠ BREAKING CHANGES
+
+* **flutter:** Minimum Flutter version is now 3.32.0
+* **dart:** Minimum Dart SDK version is now 3.8.0 
+* **analyzer:** Updated to ^7.4.0 with Element2 API support
+* **source_gen:** Updated to ^3.0.0 for improved code generation
+* **build_test:** Updated to ^3.3.0 for better testing support
+
+### Features
+
+* **flutter-3.32.8:** Full compatibility with Flutter 3.32.8 and latest Dart SDK ([#xxx](https://github.com/gibahjoe/openapi-generator-dart/issues/xxx))
+* **analyzer:** Updated analyzer package to ^7.4.0 for enhanced static analysis
+* **source_gen:** Updated source_gen to ^3.0.0 for improved code generation performance
+* **element2-api:** Adapted to latest analyzer Element2 API changes for better compatibility
+* **performance:** Enhanced build performance and reliability
+
+### Bug Fixes
+
+* **compatibility:** Resolved compatibility issues with latest Dart SDK
+* **element2:** Fixed Element2 API migration issues in generator and tests
+* **build:** Fixed build script compilation issues with updated dependencies
+* **skipSpecDepMessage:** Resolved undefined constant import issues
+
+### Migration Guide
+
+To upgrade from v6.x to v7.0.0:
+
+1. Update your Flutter version to 3.32.8 or later
+2. Update your dependencies:
+   ```yaml
+   dev_dependencies:
+     openapi_generator: ^7.0.0
+     build_runner: ^2.6.0
+   ```
+3. Clear caches and regenerate:
+   ```bash
+   dart pub cache clean
+   flutter pub get
+   dart run build_runner clean
+   dart run build_runner build --delete-conflicting-outputs
+   ```
+
 ## [5.0.2](https://github.com/gibahjoe/openapi-generator-dart/compare/v5.0.0...v5.0.2) (2024-01-16)
 
 ### Bug Fixes

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:build/build.dart';
 import 'package:build_test/build_test.dart';
 import 'package:mockito/annotations.dart';
@@ -137,7 +138,9 @@ Future<String> generateFromSource(String source,
 //   ''',
 //   (resolver) async =>
 //   (await resolver.findLibraryByName('test_lib'))!))
-//       .getClass('MyClass')!
+//       .topLevelElements
+//       .whereType<ClassElement2>()
+//       .firstWhere((element) => element.name2 == 'MyClass')
 //       .metadata
 //       .map((e) => ConstantReader(e.computeConstantValue()!))
 //   .first;
@@ -165,7 +168,9 @@ Future<ConstantReader> readAnnotation(Openapi annotation) async {
   printOnFailure(annotatedClass);
   return (await resolveSource(annotatedClass,
           (resolver) async => (await resolver.findLibraryByName('test_lib'))!))
-      .getClass('MyClass')!
+      .children
+      .whereType<ClassElement2>()
+      .firstWhere((element) => element.name == 'MyClass')
       .metadata
       .map((e) => ConstantReader(e.computeConstantValue()!))
       .first;
@@ -179,7 +184,9 @@ Future<ConstantReader> readAnnotationFromFile(
           File('$testSpecPath/next_gen_builder_test_config.dart')
               .readAsStringSync(),
           (resolver) async => (await resolver.findLibraryByName(libraryName))!))
-      .getClass(className)!
+      .children
+      .whereType<ClassElement2>()
+      .firstWhere((element) => element.name == className)
       .metadata
       .map((e) => ConstantReader(e.computeConstantValue()!))
       .first;
