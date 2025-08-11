@@ -1,4 +1,4 @@
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:build/src/builder/build_step.dart';
 import 'package:openapi_generator/src/utils.dart';
 import 'package:openapi_generator_annotations/openapi_generator_annotations.dart';
@@ -10,11 +10,11 @@ class TestGenerator extends src_gen.GeneratorForAnnotation<Openapi> {
   const TestGenerator({this.requireTestClassPrefix = true});
 
   @override
-  Iterable<String> generateForAnnotatedElement(Element2 element,
+  Iterable<String> generateForAnnotatedElement(Element element,
       src_gen.ConstantReader annotation, BuildStep buildStep) sync* {
     assert(!annotation.isNull, "The source generator shouldn't be null");
 
-    if (element is! ClassElement2) {
+    if (element is! ClassElement) {
       throw src_gen.InvalidGenerationSourceError(
         'Only supports annotated classes.',
         todo: 'Remove `TestAnnotation` from the associated element.',
@@ -22,7 +22,7 @@ class TestGenerator extends src_gen.GeneratorForAnnotation<Openapi> {
       );
     }
 
-    if (requireTestClassPrefix && !element.displayName.startsWith('TestClass')) {
+    if (requireTestClassPrefix && !element.name.startsWith('TestClass')) {
       throw src_gen.InvalidGenerationSourceError(
         'All classes must start with `TestClass`.',
         todo: 'Rename the type or remove the `TestAnnotation` from class.',

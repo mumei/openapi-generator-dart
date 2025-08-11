@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:build_test/build_test.dart';
 import 'package:mockito/annotations.dart';
@@ -168,8 +168,9 @@ Future<ConstantReader> readAnnotation(Openapi annotation) async {
   printOnFailure(annotatedClass);
   return (await resolveSource(annotatedClass,
           (resolver) async => (await resolver.findLibraryByName('test_lib'))!))
-      .classes
-      .firstWhere((element) => element.displayName == 'MyClass')
+      .topLevelElements
+      .whereType<ClassElement>()
+      .firstWhere((element) => element.name == 'MyClass')
       .metadata
       .map((e) => ConstantReader(e.computeConstantValue()!))
       .first;
@@ -183,8 +184,9 @@ Future<ConstantReader> readAnnotationFromFile(
           File('$testSpecPath/next_gen_builder_test_config.dart')
               .readAsStringSync(),
           (resolver) async => (await resolver.findLibraryByName(libraryName))!))
-      .classes
-      .firstWhere((element) => element.displayName == className)
+      .topLevelElements
+      .whereType<ClassElement>()
+      .firstWhere((element) => element.name == className)
       .metadata
       .map((e) => ConstantReader(e.computeConstantValue()!))
       .first;

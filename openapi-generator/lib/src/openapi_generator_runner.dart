@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:logging/logging.dart';
 import 'package:openapi_generator/src/determine_flutter_project_status.dart';
@@ -25,7 +25,7 @@ class OpenapiGenerator extends GeneratorForAnnotation<annots.Openapi> {
 
   @override
   FutureOr<String> generateForAnnotatedElement(
-      Element2 element, ConstantReader annotations, BuildStep buildStep) async {
+      Element element, ConstantReader annotations, BuildStep buildStep) async {
     logOutputMessage(
       log: log,
       communication: OutputMessage(
@@ -39,8 +39,8 @@ class OpenapiGenerator extends GeneratorForAnnotation<annots.Openapi> {
     );
 
     try {
-      if (element is! ClassElement2) {
-        final friendlyName = element.displayName;
+      if (element is! ClassElement) {
+        final friendlyName = element.name;
 
         throw InvalidGenerationSourceError(
           'Generator cannot target `$friendlyName`.',

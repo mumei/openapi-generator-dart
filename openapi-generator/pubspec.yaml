@@ -8,10 +8,10 @@ environment:
 
 dependencies:
   build: '>=2.0.0 <4.0.0'
-  source_gen: '>=2.0.0 <4.0.0'
+  source_gen: '^2.0.0'
   path: '>=1.0.0 <=2.0.0'
   openapi_generator_annotations: ^6.1.0
-  analyzer: ^7.4.0
+  analyzer: ^6.4.0
   openapi_generator_cli: ^6.1.0
   crypto: '>=3.0.6 <=4.0.0'
   meta: '>=1.15.0 <=2.0.0'
@@ -22,7 +22,7 @@ dependencies:
 dev_dependencies:
   test: ^1.24.2
   mockito: ^5.4.4
-  build_test: ^3.3.0
+  build_test: 2.1.7
   source_gen_test:
   test_process:
   pedantic:
