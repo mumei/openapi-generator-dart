@@ -235,6 +235,14 @@ class CustomApi {}
     openapi_generator: ^7.0.0  # latest with Flutter 3.32.0 support
   ```
 
+- **Riverpod Generator Compatibility:**  
+  If you encounter conflicts with `riverpod_generator`, this has been resolved in v7.0.0+ with relaxed build constraints:
+  ```yaml
+  dev_dependencies:
+    openapi_generator: ^7.0.0  # Compatible with riverpod_generator
+    riverpod_generator: ^2.6.1  # or any version
+  ```
+
 - **Dependency Conflicts:**  
   Use `dependency_overrides` in the generated package's `pubspec.yaml` and add `pubspec.yaml` to `.openapi-generator-ignore` to prevent overwrites.
 

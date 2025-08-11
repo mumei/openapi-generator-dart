@@ -22,6 +22,7 @@
 * **element2:** Fixed Element2 API migration issues in generator and tests
 * **build:** Fixed build script compilation issues with updated dependencies
 * **skipSpecDepMessage:** Resolved undefined constant import issues
+* **riverpod-compatibility:** Fixed dependency conflicts with riverpod_generator by relaxing build constraints to `>=2.0.0 <4.0.0`
 
 ### Migration Guide
 
