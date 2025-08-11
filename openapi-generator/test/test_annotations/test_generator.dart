@@ -22,7 +22,7 @@ class TestGenerator extends src_gen.GeneratorForAnnotation<Openapi> {
       );
     }
 
-    if (requireTestClassPrefix && !element.name.startsWith('TestClass')) {
+    if (requireTestClassPrefix && !element.displayName.startsWith('TestClass')) {
       throw src_gen.InvalidGenerationSourceError(
         'All classes must start with `TestClass`.',
         todo: 'Rename the type or remove the `TestAnnotation` from class.',

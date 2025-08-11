@@ -113,9 +113,8 @@ class TestClassConfig extends OpenapiGeneratorConfig {}
                     ''',
               (resolver) async =>
                   (await resolver.findLibraryByName('test_lib'))!))
-          .children
-          .whereType<ClassElement2>()
-          .firstWhere((element) => element.name == 'TestClassConfig')
+          .classes
+          .firstWhere((element) => element.displayName == 'TestClassConfig')
           .metadata
           .map((e) => ConstantReader(e.computeConstantValue()!))
           .first;
@@ -409,9 +408,8 @@ class TestClassConfig extends OpenapiGeneratorConfig {}
                       .readAsStringSync(),
                   (resolver) async =>
                       (await resolver.findLibraryByName('test_lib'))!))
-              .children
-          .whereType<ClassElement2>()
-          .firstWhere((element) => element.name == 'TestClassConfig')
+              .classes
+          .firstWhere((element) => element.displayName == 'TestClassConfig')
               .metadata
               .map((e) => ConstantReader(e.computeConstantValue()!))
               .first;
@@ -458,9 +456,8 @@ class TestClassConfig extends OpenapiGeneratorConfig {}
                     ''',
                     (resolver) async =>
                         (await resolver.findLibraryByName('test_lib'))!))
-                .children
-          .whereType<ClassElement2>()
-          .firstWhere((element) => element.name == 'TestClassConfig')
+                .classes
+          .firstWhere((element) => element.displayName == 'TestClassConfig')
                 .metadata
                 .map((e) => ConstantReader(e.computeConstantValue()!))
                 .first;

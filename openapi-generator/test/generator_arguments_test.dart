@@ -148,9 +148,8 @@ void main() {
                 config,
                 (resolver) async =>
                     (await resolver.findLibraryByName('test_lib'))!))
-            .children
-            .whereType<ClassElement2>()
-            .firstWhere((element) => element.name == 'TestClassConfig')
+            .classes
+            .firstWhere((element) => element.displayName == 'TestClassConfig')
             .metadata
             .map((e) => src_gen.ConstantReader(e.computeConstantValue()!))
             .first;
@@ -201,9 +200,8 @@ void main() {
                 config,
                 (resolver) async =>
                     (await resolver.findLibraryByName('test_lib'))!))
-            .children
-            .whereType<ClassElement2>()
-            .firstWhere((element) => element.name == 'DioPropertiesTestConfig')
+            .classes
+            .firstWhere((element) => element.displayName == 'DioPropertiesTestConfig')
             .metadata
             .map((e) => src_gen.ConstantReader(e.computeConstantValue()!))
             .first;
@@ -261,9 +259,8 @@ void main() {
                 config,
                 (resolver) async =>
                     (await resolver.findLibraryByName('test_lib'))!))
-            .children
-            .whereType<ClassElement2>()
-            .firstWhere((element) => element.name == 'DioAltPropertiesTestConfig')
+            .classes
+            .firstWhere((element) => element.displayName == 'DioAltPropertiesTestConfig')
             .metadata
             .map((e) => src_gen.ConstantReader(e.computeConstantValue()!))
             .first;
@@ -327,9 +324,8 @@ void main() {
                 config,
                 (resolver) async =>
                     (await resolver.findLibraryByName('test_lib'))!))
-            .children
-            .whereType<ClassElement2>()
-            .firstWhere((element) => element.name == 'DioAltPropertiesTestConfig')
+            .classes
+            .firstWhere((element) => element.displayName == 'DioAltPropertiesTestConfig')
             .metadata
             .map((e) => src_gen.ConstantReader(e.computeConstantValue()!))
             .first;

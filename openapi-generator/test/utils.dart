@@ -168,9 +168,8 @@ Future<ConstantReader> readAnnotation(Openapi annotation) async {
   printOnFailure(annotatedClass);
   return (await resolveSource(annotatedClass,
           (resolver) async => (await resolver.findLibraryByName('test_lib'))!))
-      .children
-      .whereType<ClassElement2>()
-      .firstWhere((element) => element.name == 'MyClass')
+      .classes
+      .firstWhere((element) => element.displayName == 'MyClass')
       .metadata
       .map((e) => ConstantReader(e.computeConstantValue()!))
       .first;
@@ -184,9 +183,8 @@ Future<ConstantReader> readAnnotationFromFile(
           File('$testSpecPath/next_gen_builder_test_config.dart')
               .readAsStringSync(),
           (resolver) async => (await resolver.findLibraryByName(libraryName))!))
-      .children
-      .whereType<ClassElement2>()
-      .firstWhere((element) => element.name == className)
+      .classes
+      .firstWhere((element) => element.displayName == className)
       .metadata
       .map((e) => ConstantReader(e.computeConstantValue()!))
       .first;
