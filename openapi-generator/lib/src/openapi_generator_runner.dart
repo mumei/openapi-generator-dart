@@ -194,11 +194,17 @@ class OpenapiGenerator extends GeneratorForAnnotation<annots.Openapi> {
       var builderCanReadSpec = false;
       if (args.inputSpec is! annots.RemoteSpec &&
           !path.isAbsolute(args.inputSpec.path)) {
-        final maybeAssetId =
-            AssetId(buildStep.inputId.package, args.inputSpec.path);
-        // Check if asset can be read.  If so, build_runner will mark the asset
-        // as a dependency and re-run the builder when it is modified.
-        builderCanReadSpec = await buildStep.canRead(maybeAssetId);
+        try {
+          final maybeAssetId =
+              AssetId(buildStep.inputId.package, args.inputSpec.path);
+          // Check if asset can be read.  If so, build_runner will mark the asset
+          // as a dependency and re-run the builder when it is modified.
+          builderCanReadSpec = await buildStep.canRead(maybeAssetId);
+        } catch (e) {
+          // If AssetId creation fails (e.g., path outside package), 
+          // treat it as unreadable by builder
+          builderCanReadSpec = false;
+        }
         if (!builderCanReadSpec) {
           logOutputMessage(
             log: log,

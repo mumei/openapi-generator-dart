@@ -596,6 +596,60 @@ class TestClassConfig extends OpenapiGeneratorConfig {}
               generatedOutput, contains('Successfully cached spec changes.'));
         });
       });
+
+      group('handles external file paths', () {
+        test('does not throw error for paths outside package', () async {
+          // Create a test OpenAPI spec file outside the package
+          final externalDir = Directory('${testSpecPath}../external');
+          if (!externalDir.existsSync()) {
+            externalDir.createSync(recursive: true);
+          }
+          final externalSpecFile = File('${externalDir.path}/external_openapi.yaml');
+          externalSpecFile.writeAsStringSync('''
+openapi: 3.0.0
+info:
+  title: External API
+  version: 1.0.0
+paths:
+  /test:
+    get:
+      responses:
+        '200':
+          description: OK
+''');
+
+          var annotation = Openapi(
+              generatorName: Generator.dart,
+              inputSpec: InputSpec(path: '../external/external_openapi.yaml'),
+              cachePath: '${openapiSpecCache.path}',
+              outputDirectory: '${openapiSpecCache.parent.path}/external-path-test');
+
+          // This should not throw an error, even though the path is outside package
+          generatedOutput = await generateFromAnnotation(annotation, process: mockProcess);
+          
+          expect(generatedOutput, isNot(contains('Invalid argument')));
+          expect(generatedOutput, contains('Openapi generator completed successfully.'));
+          
+          // Clean up
+          if (externalDir.existsSync()) {
+            externalDir.deleteSync(recursive: true);
+          }
+        });
+
+        test('logs warning when spec file cannot be read by builder', () async {
+          var annotation = Openapi(
+              generatorName: Generator.dart,
+              inputSpec: InputSpec(path: '../../nonexistent/openapi.yaml'),
+              cachePath: '${openapiSpecCache.path}',
+              outputDirectory: '${openapiSpecCache.parent.path}/nonexistent-path-test');
+
+          generatedOutput = await generateFromAnnotation(annotation, process: mockProcess);
+          
+          // Should not crash and should show the appropriate warning
+          expect(generatedOutput, contains('This is needed for this package to monitor changes to the spec file.'));
+          expect(generatedOutput, isNot(contains('Invalid argument')));
+        });
+      });
     });
   });
 }
